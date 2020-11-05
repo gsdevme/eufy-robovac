@@ -86,13 +86,14 @@ export class RoboVac {
 	lastStatusUpdate: number = null;
 	maxStatusUpdateAge: number = 30 * 1000; //10 Seconds
 
-	constructor(config: { deviceId: string, localKey: string }, debugLog: boolean = false) {
+	constructor(config: { deviceId: string, localKey: string, ip: string|undefined }, debugLog: boolean = false) {
 		this.debugLog = debugLog;
 		if(!config.deviceId) {
 			throw new Error('You must pass through deviceId');
 		}
 		this.api = new TuyAPI(
 			{
+			    ip: config.ip,
 				id: config.deviceId,
 				key: config.localKey
 			}
